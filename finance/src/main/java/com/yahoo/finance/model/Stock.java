@@ -2,6 +2,7 @@ package com.yahoo.finance.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Stock implements Serializable{
 	
@@ -66,5 +67,20 @@ public class Stock implements Serializable{
 		return "Stock [symbol=" + symbol + ", name=" + name + ", price=" + price + ", watch=" + watch + "]";
 	}
 	
-
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, price, symbol, watch);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Stock other = (Stock) obj;
+		return Objects.equals(name, other.name) && Objects.equals(price, other.price)
+				&& Objects.equals(symbol, other.symbol) && Objects.equals(watch, other.watch);
+	}
 }
